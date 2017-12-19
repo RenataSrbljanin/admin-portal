@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../services/login.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -9,7 +10,7 @@ export class NavBarComponent implements OnInit {
 
   private loggedIn = false;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router:Router ) { }
 
   toogleDesplay(){
     this.loggedIn = !this.loggedIn;
@@ -24,6 +25,7 @@ export class NavBarComponent implements OnInit {
         console.log(error);
       }
     );
+    this.router.navigate(['/']);
   }
   ngOnInit() {
     this.loginService.checkSession().subscribe(
